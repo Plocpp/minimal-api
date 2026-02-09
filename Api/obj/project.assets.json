@@ -3569,11 +3569,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\FACULDADE\\Documents\\projetos Dio\\MINIMAL-API\\Api\\minimal-api.csproj",
+      "projectUniqueName": "C:\\Users\\FACULDADE\\Documents\\projetos Dio\\MINIMAL-API\\Api\\minimal-api.csproj",
       "projectName": "minimal-api",
-      "projectPath": "c:\\Users\\FACULDADE\\Documents\\projetos Dio\\MINIMAL-API\\Api\\minimal-api.csproj",
+      "projectPath": "C:\\Users\\FACULDADE\\Documents\\projetos Dio\\MINIMAL-API\\Api\\minimal-api.csproj",
       "packagesPath": "C:\\Users\\FACULDADE\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\FACULDADE\\Documents\\projetos Dio\\MINIMAL-API\\Api\\obj\\",
+      "outputPath": "C:\\Users\\FACULDADE\\Documents\\projetos Dio\\MINIMAL-API\\Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\FACULDADE\\AppData\\Roaming\\NuGet\\NuGet.Config"
