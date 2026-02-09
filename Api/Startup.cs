@@ -33,22 +33,35 @@ public class Startup
     public IConfiguration Configuration {get; set ;} = default!;
     
     public void ConfigureServices(IServiceCollection services)
+{
+    services.AddCors(options =>
     {
-        services.AddAuthentication(options =>
+        options.AddPolicy("OpenCors", policy =>
         {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }
-        ).AddJwtBearer(option =>
-        {
-            option.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateLifetime = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
-                ValidateIssuer = false,
-                ValidateAudience =  false,
-            };
+            policy
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
         });
+    });
+
+    services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(option =>
+    {
+        option.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateLifetime = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+        };
+    });
+
+
         services.AddAuthorization();
         services.AddScoped<IAdministradorServico, AdministradorServico>();
         services.AddScoped<IVeiculoServico, VeiculoServico>();
@@ -104,13 +117,15 @@ public class Startup
 
         
         app.UseRouting();
-        
-        app.UseAuthentication();
-        app.UseAuthorization();
 
-        
-        app.UseEndpoints(endpoint =>
-        {
+app.UseCors("OpenCors"); // 🔥 CORS AQUI
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseEndpoints(endpoint =>
+{
+
 #region Home
             endpoint.MapGet("/", () => Results.Ok(new Home())).AllowAnonymous().WithTags("Home");
 #endregion
